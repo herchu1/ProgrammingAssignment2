@@ -1,7 +1,13 @@
-## Put comments here that give an overall description of what your
-## functions do
+## This pair of functions allows to manage matrices
+## that optimize complex and time consuming calculations
+## by caching a previous calculated result.
 
-## Write a short comment describing this function
+
+## makeCacheMatrix converts a matrix into an object
+## that can hold previously calculated results.
+## Usage:
+##   mcm <- makeCacheMatrix(a_matrix)
+##   mcm$get() returns the original a_matrix
 
 makeCacheMatrix <- function(x = matrix()) {
   inv <- NULL
@@ -18,10 +24,16 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cacheSolve returns the inverse of the matrix
+## It's parameter must be of the type constructed
+## by makeCacheMatrix. If the inverse of that
+## matrix was already calculated it returns this
+## results. Otherwise it calls the R function solve
+## and store the result for later reuse.
+## Usage:
+##    inverse <- cacheSolve(mcm)
 
 cacheSolve <- function(x, ...) {
-  ## Return a matrix that is the inverse of 'x'
   inv <- x$getinv()
   if(!is.null(inv)) {
     message("getting cached data")
